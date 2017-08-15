@@ -56,30 +56,22 @@ function TodosList(props) {
 
   return (
     <div>
-      {activeTodos.map(todo => (
+      {[activeTodos, completedTodos].map(todos => todos.map(todo => (
         <TodosListItem
           readonly={props.readonly}
           todo={todo}
           key={todo.id}
           onTodoUpdate={props.onTodoUpdate}
         />
-      ))}
-      {completedTodos.map(todo => (
-        <TodosListItem
-          readonly={props.readonly}
-          todo={todo}
-          key={todo.id}
-          onTodoUpdate={props.onTodoUpdate}
-        />
-      ))}
+      )))}
     </div>
   );
 }
 
 TodosList.propTypes = {
   todos: PropTypes.arrayOf(Object),
-  onTodoUpdate: PropTypes.func,
-  readonly: PropTypes.bool,
+  onTodoUpdate: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
+  readonly: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
 };
 
 TodosList.defaultProps = {
