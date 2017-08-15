@@ -15,16 +15,16 @@ class TodosPage extends React.Component {
       </div>
       <div className="column column-50">
         <h3>Readonly</h3>
-        <TodosList todos={this.props.todos} />
+        <TodosList todos={this.props.todos} readonly={true} />
       </div>
     </div>);
   }
 }
 
 TodosPage.propTypes = {
-  todos: PropTypes.array.required,
-  updateTodo: PropTypes.func.required,
-  createTodo: PropTypes.func.required,
+  todos: PropTypes.arrayOf(Object),
+  updateTodo: PropTypes.func,
+  createTodo: PropTypes.func,
 };
 
 TodosPage.defaultProps = {

@@ -8,6 +8,8 @@ class TodosListItem extends React.Component {
   }
 
   handleChange(event) {
+    if (this.props.readonly) return;
+
     this.props.onTodoUpdate(this.props.todo, {
       completed: event.target.checked,
     });
@@ -20,9 +22,13 @@ class TodosListItem extends React.Component {
     };
 
     return (<div>
-      <label className="label-inline" style={style} htmlFor="input">
-        {this.props.onTodoUpdate && (
-          <input type="checkbox" checked={todo.completed} onChange={this.handleChange} />
+      <label className="label-inline" style={style}>
+        {!this.props.readonly && (
+          <input
+            type="checkbox"
+            checked={todo.completed}
+            onChange={this.handleChange}
+          />
         )}
         {todo.title}
       </label>
@@ -32,12 +38,14 @@ class TodosListItem extends React.Component {
 
 TodosListItem.propTypes = {
   onTodoUpdate: PropTypes.func,
-  todo: PropTypes.object.required,
+  todo: PropTypes.objectOf(Object),
+  readonly: PropTypes.bool,
 };
 
 TodosListItem.defaultProps = {
-  onTodoUpdate: null,
+  onTodoUpdate: () => {},
   todo: {},
+  readonly: false,
 };
 
 function TodosList(props) {
@@ -47,23 +55,25 @@ function TodosList(props) {
   return (
     <div>
       {activeTodos.map(todo => (
-        <TodosListItem todo={todo} key={todo.id} onTodoUpdate={props.onTodoUpdate} />
+        <TodosListItem readonly={props.readonly} todo={todo} key={todo.id} onTodoUpdate={props.onTodoUpdate} />
       ))}
       {completedTodos.map(todo => (
-        <TodosListItem todo={todo} key={todo.id} onTodoUpdate={props.onTodoUpdate} />
+        <TodosListItem readonly={props.readonly} todo={todo} key={todo.id} onTodoUpdate={props.onTodoUpdate} />
       ))}
     </div>
   );
 }
 
 TodosList.propTypes = {
-  todos: PropTypes.array.required,
+  todos: PropTypes.arrayOf(Object),
   onTodoUpdate: PropTypes.func,
+  readonly: PropTypes.bool,
 };
 
 TodosList.defaultProps = {
   todos: [],
-  onTodoUpdate: null,
+  onTodoUpdate: () => {},
+  readonly: false,
 };
 
 export default TodosList;

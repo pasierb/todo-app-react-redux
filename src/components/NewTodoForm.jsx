@@ -42,7 +42,7 @@ NewTodoForm.propTypes = {
 };
 
 NewTodoForm.defaultProps = {
-  onTodoAdd: null,
+  onTodoAdd: () => {},
 };
 
 export default NewTodoForm;
