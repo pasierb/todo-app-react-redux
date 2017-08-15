@@ -1,25 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class NewTodoForm extends React.Component {
+class NewTodoForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { title: "" };
+    this.state = { title: '' };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleSubmit(event) {
-    this.props.onTodoAdd({
-      title: this.state.title
-    });
-    this.setState({ title: "" });
     event.preventDefault();
+
+    this.props.onTodoAdd({
+      title: this.state.title,
+    });
+    this.setState({ title: '' });
   }
 
   handleChange(event) {
     this.setState({
-      title: event.target.value
+      title: event.target.value,
     });
   }
 
@@ -28,9 +30,19 @@ export default class NewTodoForm extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.title} onChange={this.handleChange} />
-          <input type="submit" />
+          <input type="submit" style={{ display: 'none' }} />
         </form>
       </div>
-    )
+    );
   }
 }
+
+NewTodoForm.propTypes = {
+  onTodoAdd: PropTypes.func,
+};
+
+NewTodoForm.defaultProps = {
+  onTodoAdd: null,
+};
+
+export default NewTodoForm;
