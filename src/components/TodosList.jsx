@@ -21,6 +21,7 @@ class TodosListItem extends React.Component {
       textDecoration: todo.completed ? 'line-through' : 'none',
     };
 
+    /* eslint-disable jsx-a11y/label-has-for */
     return (<div>
       <label className="label-inline" style={style}>
         {!this.props.readonly && (
@@ -33,6 +34,7 @@ class TodosListItem extends React.Component {
         {todo.title}
       </label>
     </div>);
+    /* eslint-enable */
   }
 }
 
@@ -55,10 +57,20 @@ function TodosList(props) {
   return (
     <div>
       {activeTodos.map(todo => (
-        <TodosListItem readonly={props.readonly} todo={todo} key={todo.id} onTodoUpdate={props.onTodoUpdate} />
+        <TodosListItem
+          readonly={props.readonly}
+          todo={todo}
+          key={todo.id}
+          onTodoUpdate={props.onTodoUpdate}
+        />
       ))}
       {completedTodos.map(todo => (
-        <TodosListItem readonly={props.readonly} todo={todo} key={todo.id} onTodoUpdate={props.onTodoUpdate} />
+        <TodosListItem
+          readonly={props.readonly}
+          todo={todo}
+          key={todo.id}
+          onTodoUpdate={props.onTodoUpdate}
+        />
       ))}
     </div>
   );

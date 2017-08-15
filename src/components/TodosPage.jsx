@@ -5,6 +5,7 @@ import TodosList from './TodosList';
 import NewTodoForm from './NewTodoForm';
 import * as todoActions from '../actions/todoActions';
 
+/* eslint-disable react/prefer-stateless-function, react/jsx-boolean-value */
 class TodosPage extends React.Component {
   render() {
     return (<div className="row">
@@ -20,6 +21,7 @@ class TodosPage extends React.Component {
     </div>);
   }
 }
+/* eslint-enable */
 
 TodosPage.propTypes = {
   todos: PropTypes.arrayOf(Object),

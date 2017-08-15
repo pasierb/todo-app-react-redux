@@ -16,5 +16,5 @@ render(
   <Provider store={store}>
     <TodosPage />
   </Provider>,
-  window.document.getElementById('app'),
+  window.document.getElementById('app'), // eslint-disable-line no-undef
 );
