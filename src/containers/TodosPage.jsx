@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import TodosList from './TodosList';
-import NewTodoForm from './NewTodoForm';
+import TodosList from '../components/TodosList';
+import NewTodoForm from '../components/NewTodoForm';
 import * as todoActions from '../actions/todoActions';
 
 /* eslint-disable react/prefer-stateless-function, react/jsx-boolean-value */

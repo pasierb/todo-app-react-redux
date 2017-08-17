@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import configureStore from '../store/configureStore';
-import TodosPage from './TodosPage';
-import { fetchTodos } from '../actions/todoActions';
+import configureStore from './store/configureStore';
+import TodosPage from './containers/TodosPage';
+import { fetchTodos } from './actions/todoActions';
 
 const store = configureStore();
 store.dispatch(fetchTodos());
