@@ -30390,6 +30390,13 @@ var TodosPage = function (_React$Component) {
   (0, _createClass3.default)(TodosPage, [{
     key: 'render',
     value: function render() {
+      var activeTodos = this.props.todos.filter(function (todo) {
+        return !todo.completed;
+      });
+      var completedTodos = this.props.todos.filter(function (todo) {
+        return todo.completed;
+      });
+
       return _react2.default.createElement(
         'div',
         { className: 'row' },
@@ -30402,11 +30409,16 @@ var TodosPage = function (_React$Component) {
             'Edit'
           ),
           _react2.default.createElement(_TodosList2.default, {
-            todos: this.props.todos,
+            todos: activeTodos,
             onTodoUpdate: this.props.updateTodo,
             onTodoDelete: this.props.deleteTodo
           }),
-          _react2.default.createElement(_NewTodoForm2.default, { onTodoAdd: this.props.createTodo })
+          _react2.default.createElement(_NewTodoForm2.default, { onTodoAdd: this.props.createTodo }),
+          _react2.default.createElement(_TodosList2.default, {
+            todos: completedTodos,
+            onTodoUpdate: this.props.updateTodo,
+            onTodoDelete: this.props.deleteTodo
+          })
         ),
         _react2.default.createElement(
           'div',
@@ -30416,7 +30428,7 @@ var TodosPage = function (_React$Component) {
             null,
             'Readonly'
           ),
-          _react2.default.createElement(_TodosList2.default, { todos: this.props.todos, readonly: true })
+          _react2.default.createElement(_TodosList2.default, { todos: activeTodos.concat(completedTodos), readonly: true })
         )
       );
     }
@@ -31013,25 +31025,16 @@ var _TodosListItem2 = _interopRequireDefault(_TodosListItem);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function TodosList(props) {
-  var activeTodos = props.todos.filter(function (todo) {
-    return !todo.completed;
-  });
-  var completedTodos = props.todos.filter(function (todo) {
-    return todo.completed;
-  });
-
   return _react2.default.createElement(
     'div',
     null,
-    [activeTodos, completedTodos].map(function (todos) {
-      return todos.map(function (todo) {
-        return _react2.default.createElement(_TodosListItem2.default, {
-          readonly: props.readonly,
-          todo: todo,
-          key: todo.id,
-          onTodoUpdate: props.onTodoUpdate,
-          onTodoDelete: props.onTodoDelete
-        });
+    props.todos.map(function (todo) {
+      return _react2.default.createElement(_TodosListItem2.default, {
+        readonly: props.readonly,
+        todo: todo,
+        key: todo.id,
+        onTodoUpdate: props.onTodoUpdate,
+        onTodoDelete: props.onTodoDelete
       });
     })
   );
@@ -31039,13 +31042,15 @@ function TodosList(props) {
 
 TodosList.propTypes = {
   todos: _propTypes2.default.arrayOf(Object),
-  onTodoUpdate: _propTypes2.default.func, // eslint-disable-line react/no-unused-prop-types
-  readonly: _propTypes2.default.bool // eslint-disable-line react/no-unused-prop-types
+  onTodoUpdate: _propTypes2.default.func,
+  onTodoDelete: _propTypes2.default.func,
+  readonly: _propTypes2.default.bool
 };
 
 TodosList.defaultProps = {
   todos: [],
   onTodoUpdate: function onTodoUpdate() {},
+  onTodoDelete: function onTodoDelete() {},
   readonly: false
 };
 
