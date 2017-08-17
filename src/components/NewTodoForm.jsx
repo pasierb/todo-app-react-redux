@@ -29,7 +29,12 @@ class NewTodoForm extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.title} onChange={this.handleChange} />
+          <input
+            placeholder="New todo"
+            type="text"
+            value={this.state.title}
+            onChange={this.handleChange}
+          />
           <input type="submit" style={{ display: 'none' }} />
         </form>
       </div>
