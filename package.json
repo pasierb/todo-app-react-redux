@@ -4,7 +4,7 @@
   "description": "TODO App using React & Redux",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node_modules/.bin/webpack-dev-server --watch",
+    "start": "node_modules/.bin/webpack-dev-server --watch --content-base docs/",
     "prebuild": "npm run lint",
     "build": "webpack",
     "lint": "node_modules/.bin/eslint src/*"
