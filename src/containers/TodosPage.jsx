@@ -8,19 +8,27 @@ import * as todoActions from '../actions/todoActions';
 /* eslint-disable react/prefer-stateless-function, react/jsx-boolean-value */
 class TodosPage extends React.Component {
   render() {
+    const activeTodos = this.props.todos.filter(todo => !todo.completed);
+    const completedTodos = this.props.todos.filter(todo => todo.completed);
+
     return (<div className="row">
       <div className="column">
         <h3>Edit</h3>
         <TodosList
-          todos={this.props.todos}
+          todos={activeTodos}
           onTodoUpdate={this.props.updateTodo}
           onTodoDelete={this.props.deleteTodo}
         />
         <NewTodoForm onTodoAdd={this.props.createTodo} />
+        <TodosList
+          todos={completedTodos}
+          onTodoUpdate={this.props.updateTodo}
+          onTodoDelete={this.props.deleteTodo}
+        />
       </div>
       <div className="column">
         <h3>Readonly</h3>
-        <TodosList todos={this.props.todos} readonly={true} />
+        <TodosList todos={activeTodos.concat(completedTodos)} readonly={true} />
       </div>
     </div>);
   }
