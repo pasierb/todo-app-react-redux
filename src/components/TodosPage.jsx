@@ -9,7 +9,7 @@ import * as todoActions from '../actions/todoActions';
 class TodosPage extends React.Component {
   render() {
     return (<div className="row">
-      <div className="column column-50">
+      <div className="column">
         <h3>Edit</h3>
         <TodosList
           todos={this.props.todos}
@@ -18,7 +18,7 @@ class TodosPage extends React.Component {
         />
         <NewTodoForm onTodoAdd={this.props.createTodo} />
       </div>
-      <div className="column column-50">
+      <div className="column">
         <h3>Readonly</h3>
         <TodosList todos={this.props.todos} readonly={true} />
       </div>

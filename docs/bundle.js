@@ -30395,7 +30395,7 @@ var TodosPage = function (_React$Component) {
         { className: 'row' },
         _react2.default.createElement(
           'div',
-          { className: 'column column-50' },
+          { className: 'column' },
           _react2.default.createElement(
             'h3',
             null,
@@ -30410,7 +30410,7 @@ var TodosPage = function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'column column-50' },
+          { className: 'column' },
           _react2.default.createElement(
             'h3',
             null,
