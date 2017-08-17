@@ -1,13 +1,23 @@
+import * as actionTypes from '../actions/actionTypes';
+
 export default function todoReducer(state = [], action) {
   switch (action.type) {
-    case 'CREATE_TODO': {
-      return [...state, Object.assign({ id: Date.now() }, action.todo)];
+    case actionTypes.TODO_CREATE_SUCCEEDED: {
+      return [...state, action.todo];
     }
-    case 'UPDATE_TODO': {
+    case actionTypes.TODO_UPDATE_SUCCEEDED: {
       const index = state.findIndex(todo => todo.id === action.todo.id);
       const newState = [...state];
 
-      newState[index] = Object.assign({}, state[index], action.attributes);
+      newState[index] = action.todo;
+
+      return newState;
+    }
+    case actionTypes.TODO_DELETE_SUCCEEDED: {
+      const index = state.findIndex(todo => todo.id === action.todo.id);
+      const newState = [...state];
+
+      newState.splice(index, 1);
 
       return newState;
     }

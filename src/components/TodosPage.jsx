@@ -11,7 +11,11 @@ class TodosPage extends React.Component {
     return (<div className="row">
       <div className="column column-50">
         <h3>Edit</h3>
-        <TodosList todos={this.props.todos} onTodoUpdate={this.props.updateTodo} />
+        <TodosList
+          todos={this.props.todos}
+          onTodoUpdate={this.props.updateTodo}
+          onTodoDelete={this.props.deleteTodo}
+        />
         <NewTodoForm onTodoAdd={this.props.createTodo} />
       </div>
       <div className="column column-50">
@@ -27,12 +31,14 @@ TodosPage.propTypes = {
   todos: PropTypes.arrayOf(Object),
   updateTodo: PropTypes.func,
   createTodo: PropTypes.func,
+  deleteTodo: PropTypes.func,
 };
 
 TodosPage.defaultProps = {
   todos: [],
   updateTodo: () => {},
   createTodo: () => {},
+  deleteTodo: () => {},
 };
 
 function mapStateToProps(state) {
@@ -45,6 +51,7 @@ function mapDispatchToProps(dispatch) {
   return {
     createTodo: todo => dispatch(todoActions.createTodo(todo)),
     updateTodo: (todo, attributes) => dispatch(todoActions.updateTodo(todo, attributes)),
+    deleteTodo: todo => dispatch(todoActions.deleteTodo(todo)),
   };
 }
 
