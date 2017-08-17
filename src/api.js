@@ -1,6 +1,6 @@
 const storage = window.localStorage; // eslint-disable-line no-undef
 
-function getTodos() {
+function fetchTodos() {
   return new Promise((resolve, reject) => {
     try {
       if (!storage.getItem('todos')) storage.setItem('todos', JSON.stringify([]));
@@ -13,7 +13,7 @@ function getTodos() {
 }
 
 async function createTodo(attributes) {
-  const todos = await getTodos();
+  const todos = await fetchTodos();
 
   return new Promise((resolve, reject) => {
     const todo = Object.assign({ id: Date.now() }, attributes);
@@ -29,7 +29,7 @@ async function createTodo(attributes) {
 }
 
 async function updateTodo(todo, attributes) {
-  const todos = await getTodos();
+  const todos = await fetchTodos();
   const updatedTodo = Object.assign({}, todo, attributes);
 
   return new Promise((resolve, reject) => {
@@ -48,7 +48,7 @@ async function updateTodo(todo, attributes) {
 }
 
 async function deleteTodo(todo) {
-  const todos = await getTodos();
+  const todos = await fetchTodos();
 
   return new Promise((resolve, reject) => {
     try {
@@ -65,4 +65,4 @@ async function deleteTodo(todo) {
   });
 }
 
-export default { createTodo, updateTodo, getTodos, deleteTodo };
+export default { createTodo, updateTodo, fetchTodos, deleteTodo };

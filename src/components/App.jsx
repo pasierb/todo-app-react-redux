@@ -3,15 +3,14 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from '../store/configureStore';
 import TodosPage from './TodosPage';
-import api from '../api';
+import { fetchTodos } from '../actions/todoActions';
 
-api.getTodos().then((todos) => {
-  const store = configureStore({ todos });
+const store = configureStore();
+store.dispatch(fetchTodos());
 
-  render(
-    <Provider store={store}>
-      <TodosPage />
-    </Provider>,
-    window.document.getElementById('app'), // eslint-disable-line no-undef
-  );
-});
+render(
+  <Provider store={store}>
+    <TodosPage />
+  </Provider>,
+  window.document.getElementById('app'), // eslint-disable-line no-undef
+);

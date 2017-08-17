@@ -21,6 +21,9 @@ export default function todoReducer(state = [], action) {
 
       return newState;
     }
+    case actionTypes.TODOS_FETCH_SUCCEEDED: {
+      return action.todos;
+    }
     default: {
       return state;
     }

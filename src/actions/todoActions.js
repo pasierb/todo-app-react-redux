@@ -1,5 +1,13 @@
 import * as actionTypes from './actionTypes';
 
+export function fetchTodos() {
+  return { type: actionTypes.TODOS_FETCH };
+}
+
+export function fetchTodosSucceeded(todos) {
+  return { type: actionTypes.TODOS_FETCH_SUCCEEDED, todos };
+}
+
 export function createTodo(todo) {
   return { type: actionTypes.TODO_CREATE, todo };
 }
